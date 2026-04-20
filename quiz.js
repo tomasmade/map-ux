@@ -422,8 +422,6 @@ const QUESTIONS = [
       { text: 'Je ne les utilise pas — ce n\'est pas assez précis pour mes besoins', score: 1 },
     ],
   },
-];
-
   {
     category: 'data',
     text: 'Tu dois convaincre ton équipe de prioriser une amélioration UX. Quel argument utilises-tu ?',
