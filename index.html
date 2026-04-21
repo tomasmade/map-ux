@@ -10,7 +10,25 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <button
+    class="theme-toggle"
+    type="button"
+    aria-label="Changer de thème"
+    onclick="toggleTheme()"
+  >
+    <span class="icon-sun" aria-hidden="true">☀︎</span>
+    <span class="icon-moon" aria-hidden="true">☾</span>
+  </button>
   <div id="app"></div>
+  <script>
+    // Apply stored theme BEFORE first paint to avoid FOUC
+    (function () {
+      const saved = localStorage.getItem('mapux-theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = saved || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
   <script src="quiz.js"></script>
 </body>
 </html>

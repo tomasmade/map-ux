@@ -1,14 +1,176 @@
-const CATEGORIES = [
-  { id: 'research', label: 'Recherche utilisateur', color: '#6366F1', maxScore: 15 },
-  { id: 'ia',       label: 'Architecture de l\'info', color: '#8B5CF6', maxScore: 15 },
-  { id: 'proto',    label: 'Wireframing & Proto',    color: '#EC4899', maxScore: 15 },
-  { id: 'ds',       label: 'Design System',          color: '#F59E0B', maxScore: 15 },
-  { id: 'testing',  label: 'Tests utilisateurs',     color: '#10B981', maxScore: 15 },
-  { id: 'a11y',     label: 'Accessibilité',          color: '#3B82F6', maxScore: 15 },
-  { id: 'writing',  label: 'UX Writing',             color: '#F97316', maxScore: 15 },
-  { id: 'data',     label: 'Data & Analytics',       color: '#14B8A6', maxScore: 15 },
+// ─────────────────────────────────────────────────────────────────────
+// Framework : "The Path to Senior Product Designer" — Artiom Dashinsky
+// 6 pillars × 15 sous-compétences × 3 niveaux cibles (mid / senior / staff)
+// ─────────────────────────────────────────────────────────────────────
+
+const LEVELS = {
+  mid: {
+    id: 'mid',
+    label: 'Mid / Confirmé',
+    short: 'Mid',
+    description: 'Tu livres des projets de taille moyenne avec guidance. Tu cherches à devenir autonome sur des projets plus ambitieux.',
+  },
+  senior: {
+    id: 'senior',
+    label: 'Senior',
+    short: 'Senior',
+    description: 'Tu pilotes des projets complexes en autonomie. Tu veux augmenter ton impact stratégique et influencer au-delà de ton équipe.',
+  },
+  staff: {
+    id: 'staff',
+    label: 'Staff / Principal',
+    short: 'Staff',
+    description: 'Tu portes des initiatives cross-équipes et tu définis la direction design. Tu es référent sur ton domaine.',
+  },
+};
+
+const PILLARS = [
+  { id: 'craft',         label: 'Craft',          color: '#6366F1', weight: 5, tagline: 'Visuel, UX, outils et process — ce que tu produis.' },
+  { id: 'communication', label: 'Communication',  color: '#8B5CF6', weight: 5, tagline: 'Présenter, donner/recevoir du feedback, écrire clair.' },
+  { id: 'collaboration', label: 'Collaboration',  color: '#EC4899', weight: 4, tagline: 'Gérer les stakeholders et construire des relations.' },
+  { id: 'ownership',     label: 'Ownership',      color: '#F59E0B', weight: 4, tagline: 'Shipper, gérer l\'ambiguïté, initier le travail.' },
+  { id: 'strategy',      label: 'Strategy',       color: '#10B981', weight: 3, tagline: 'Comprendre le business et aligner ton design dessus.' },
+  { id: 'mentorship',    label: 'Mentorship',     color: '#14B8A6', weight: 2, tagline: 'Faire grandir les autres autour de toi.' },
 ];
 
+// Targets sur échelle 0-10 par niveau cible
+const CATEGORIES = [
+  // ── CRAFT ────────────────────────────────────────────────────────
+  {
+    id: 'research', pillar: 'craft', label: 'Recherche utilisateur',
+    targets: { mid: 5, senior: 7, staff: 8 },
+    tips: [
+      'Pars d\'hypothèses à valider, pas d\'une liste de questions ouvertes.',
+      'Triangule quali + quanti pour convaincre les stakeholders sceptiques.',
+    ],
+  },
+  {
+    id: 'ia', pillar: 'craft', label: 'Architecture de l\'info',
+    targets: { mid: 5, senior: 7, staff: 8 },
+    tips: [
+      'Teste ton arborescence avec un outil de tree testing (Treejack).',
+      'Analyse les logs de recherche avant de redesigner une navigation.',
+    ],
+  },
+  {
+    id: 'proto', pillar: 'craft', label: 'Wireframing & Proto',
+    targets: { mid: 6, senior: 8, staff: 9 },
+    tips: [
+      'Basse fidélité en exploration, haute fidélité pour valider les détails d\'interaction.',
+      'Maîtrise variables, components avancés et prototypes complexes dans Figma.',
+    ],
+  },
+  {
+    id: 'ds', pillar: 'craft', label: 'Design System',
+    targets: { mid: 4, senior: 7, staff: 8 },
+    tips: [
+      'Audite l\'existant dans le produit avant de créer un composant.',
+      'Versionne ton DS en semver avec un changelog lisible par les équipes.',
+    ],
+  },
+  {
+    id: 'testing', pillar: 'craft', label: 'Tests utilisateurs',
+    targets: { mid: 5, senior: 7, staff: 8 },
+    tips: [
+      'Priorise les findings par fréquence × impact, pas par verbatim frappant.',
+      'Combine tests modérés (profondeur) et non modérés (volume) selon la question.',
+    ],
+  },
+  {
+    id: 'a11y', pillar: 'craft', label: 'Accessibilité',
+    targets: { mid: 5, senior: 7, staff: 8 },
+    tips: [
+      'Intègre l\'accessibilité dès le wireframe, pas en fin de process.',
+      'Teste avec lecteur d\'écran + navigation clavier, pas seulement Lighthouse.',
+    ],
+  },
+  {
+    id: 'uxwriting', pillar: 'craft', label: 'UX Writing',
+    targets: { mid: 4, senior: 6, staff: 7 },
+    tips: [
+      'Utilise le vocabulaire réel de tes users (insights research), pas le jargon interne.',
+      'Distingue voix (constante, incarnant la marque) et ton (qui s\'adapte au contexte).',
+    ],
+  },
+  {
+    id: 'data', pillar: 'craft', label: 'Data & Analytics',
+    targets: { mid: 4, senior: 7, staff: 8 },
+    tips: [
+      'Jamais de conclusion sur une métrique sans son contexte.',
+      'Combine données comportementales + insights quali + impact business pour convaincre.',
+    ],
+  },
+
+  // ── COMMUNICATION ────────────────────────────────────────────────
+  {
+    id: 'presenting', pillar: 'communication', label: 'Présenter son design',
+    targets: { mid: 5, senior: 8, staff: 9 },
+    tips: [
+      'Structure tes présentations : contexte → problème → hypothèse → solution → rationale → next steps.',
+      'Adapte le niveau de détail à l\'audience : recommandation d\'abord pour les execs, détails pour les peers.',
+    ],
+  },
+  {
+    id: 'feedback', pillar: 'communication', label: 'Feedback',
+    targets: { mid: 5, senior: 7, staff: 9 },
+    tips: [
+      'Sépare les faits (data, WCAG, patterns) des opinions quand tu donnes du feedback.',
+      'Quand tu en reçois : pose des questions, ne défends pas à chaud, traite à tête reposée.',
+    ],
+  },
+  {
+    id: 'written_comm', pillar: 'communication', label: 'Écrit & oral',
+    targets: { mid: 5, senior: 7, staff: 8 },
+    tips: [
+      'Commence tes docs par un TL;DR — les détails sont là pour qui veut creuser.',
+      'Async-first pour les décisions complexes : laisse une trace écrite consultable.',
+    ],
+  },
+
+  // ── COLLABORATION ────────────────────────────────────────────────
+  {
+    id: 'stakeholders', pillar: 'collaboration', label: 'Stakeholder management',
+    targets: { mid: 4, senior: 7, staff: 9 },
+    tips: [
+      'Construis une carte de tes stakeholders : qui informer, qui consulter, qui décide.',
+      'Investis dans la relation dans des moments low-stakes, pas seulement quand tu as besoin d\'eux.',
+    ],
+  },
+
+  // ── OWNERSHIP ────────────────────────────────────────────────────
+  {
+    id: 'ownership', pillar: 'ownership', label: 'Shipping & indépendance',
+    targets: { mid: 6, senior: 8, staff: 9 },
+    tips: [
+      'Timebox ton exploration puis engage-toi sur une direction — l\'excellence bloque le shipping.',
+      'Face à un brief vague : formule ta compréhension, valide-la, puis démarre sans attendre.',
+    ],
+  },
+
+  // ── STRATEGY ─────────────────────────────────────────────────────
+  {
+    id: 'strategy', pillar: 'strategy', label: 'Business & Strategy',
+    targets: { mid: 3, senior: 6, staff: 9 },
+    tips: [
+      'Apprends les 3 métriques business du trimestre et articule ton impact dessus.',
+      'Creuse le modèle économique : qui paie, combien, pour quoi, quels leviers le font grandir.',
+    ],
+  },
+
+  // ── MENTORSHIP ───────────────────────────────────────────────────
+  {
+    id: 'mentorship', pillar: 'mentorship', label: 'Mentorat',
+    targets: { mid: 2, senior: 6, staff: 8 },
+    tips: [
+      'Utilise des questions ouvertes pour débloquer, pas des solutions toutes faites.',
+      'Documente tes décisions et anime des sessions de partage pour scaler ta connaissance.',
+    ],
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────────
+// QUESTIONS
+// ─────────────────────────────────────────────────────────────────────
 const QUESTIONS = [
   // ── Recherche utilisateur ──
   {
@@ -51,7 +213,6 @@ const QUESTIONS = [
       { text: 'Je préfère utiliser les analytics plutôt que de faire des tests', score: 0 },
     ],
   },
-
   {
     category: 'research',
     text: 'Des stakeholders sceptiques remettent en question tes findings qualitatifs. Comment les convaincre ?',
@@ -94,7 +255,6 @@ const QUESTIONS = [
       { text: 'Je ne teste pas les arborescences, j\'itère après le lancement', score: 0 },
     ],
   },
-
   {
     category: 'ia',
     text: 'Quelle est la différence entre un sitemap et un wireflow ?',
@@ -157,7 +317,6 @@ const QUESTIONS = [
       { text: 'Je préfère une réunion de passation orale plutôt que de la documentation écrite', score: 1 },
     ],
   },
-
   {
     category: 'proto',
     text: 'Après une tâche en test utilisateur, quelle question poses-tu en priorité ?',
@@ -200,7 +359,6 @@ const QUESTIONS = [
       { text: 'C\'est la responsabilité des développeurs, pas du designer', score: 0 },
     ],
   },
-
   {
     category: 'ds',
     text: 'Comment gères-tu un composant « one-off » — un élément qui n\'existe qu\'à un seul endroit dans le produit ?',
@@ -263,7 +421,6 @@ const QUESTIONS = [
       { text: 'Tu refais le test pour confirmer le problème avant d\'alerter quiconque', score: 2 },
     ],
   },
-
   {
     category: 'testing',
     text: 'Quelle est la différence entre un test d\'utilisabilité et une évaluation heuristique ?',
@@ -306,7 +463,6 @@ const QUESTIONS = [
       { text: 'Je me base sur les retours d\'utilisateurs en situation de handicap', score: 2 },
     ],
   },
-
   {
     category: 'a11y',
     text: 'Un développeur dit que les attributs ARIA ne le concernent pas — c\'est au designer de les spécifier. Quelle est ta réponse ?',
@@ -330,7 +486,7 @@ const QUESTIONS = [
 
   // ── UX Writing ──
   {
-    category: 'writing',
+    category: 'uxwriting',
     text: 'Tu dois écrire un message d\'erreur pour un champ email. Quelle formulation choisis-tu ?',
     options: [
       { text: '« Erreur — champ invalide »', score: 0 },
@@ -340,7 +496,7 @@ const QUESTIONS = [
     ],
   },
   {
-    category: 'writing',
+    category: 'uxwriting',
     text: 'Quelle est la règle principale pour rédiger un bon call-to-action (CTA) ?',
     options: [
       { text: 'Utiliser un verbe d\'action + préciser le résultat attendu pour l\'utilisateur', score: 3 },
@@ -350,7 +506,7 @@ const QUESTIONS = [
     ],
   },
   {
-    category: 'writing',
+    category: 'uxwriting',
     text: 'Tu révises le copy d\'un onboarding. Comment évalues-tu si le texte est efficace ?',
     options: [
       { text: 'Tu le fais relire par un collègue pour vérifier les fautes', score: 1 },
@@ -359,9 +515,8 @@ const QUESTIONS = [
       { text: 'Tu te fies à ton instinct de communicant et ton expérience', score: 1 },
     ],
   },
-
   {
-    category: 'writing',
+    category: 'uxwriting',
     text: 'Tu dois nommer un nouveau bouton de partage dans l\'app. Comment choisis-tu le bon label ?',
     options: [
       { text: 'Tu proposes plusieurs options et tu choisis celle qui sonne le mieux', score: 1 },
@@ -371,7 +526,7 @@ const QUESTIONS = [
     ],
   },
   {
-    category: 'writing',
+    category: 'uxwriting',
     text: 'Quelle est la différence entre le ton et la voix d\'un produit en UX Writing ?',
     options: [
       { text: 'C\'est la même chose — la façon dont on s\'exprime dans le produit', score: 0 },
@@ -432,71 +587,401 @@ const QUESTIONS = [
       { text: 'Tu escalades directement au management pour qu\'il décide', score: 0 },
     ],
   },
+
+  // ── Présenter son design ──
+  {
+    category: 'presenting',
+    text: 'Tu présentes un nouveau design à ton équipe produit. Par quoi commences-tu ?',
+    options: [
+      { text: 'Tu montres directement la solution finale, c\'est ça qui intéresse', score: 0 },
+      { text: 'Tu rappelles le contexte, le problème user et l\'hypothèse avant de montrer quoi que ce soit', score: 3 },
+      { text: 'Tu présentes les 3 options explorées et tu demandes laquelle ils préfèrent', score: 1 },
+      { text: 'Tu laisses le PM introduire pour rester concentré sur le design', score: 1 },
+    ],
+  },
+  {
+    category: 'presenting',
+    text: 'Tu présentes à un VP qui a 15 minutes. Quelle structure choisis-tu ?',
+    options: [
+      { text: 'Le contexte complet puis la solution en fin de réunion pour garder le suspense', score: 0 },
+      { text: 'La recommandation en premier, suivie du rationale, puis des détails si le temps le permet', score: 3 },
+      { text: 'Le process de conception étape par étape pour montrer ta rigueur', score: 0 },
+      { text: 'Les 3 options explorées pour qu\'il tranche lui-même', score: 1 },
+    ],
+  },
+  {
+    category: 'presenting',
+    text: 'Un dev te demande « pourquoi ce pattern et pas celui-là ? ». Que fais-tu ?',
+    options: [
+      { text: 'Tu expliques que ton expertise design te fait préférer ce pattern', score: 0 },
+      { text: 'Tu articules la logique : objectif user, contraintes, tradeoffs considérés', score: 3 },
+      { text: 'Tu te réfères au design system pour couper court à la discussion', score: 1 },
+      { text: 'Tu lui demandes ce qu\'il propose à la place', score: 1 },
+    ],
+  },
+
+  // ── Feedback ──
+  {
+    category: 'feedback',
+    text: 'Tu revois le design d\'un designer junior. Quel type de feedback donnes-tu ?',
+    options: [
+      { text: '« Je n\'aime pas cette couleur, change-la »', score: 0 },
+      { text: '« Ce choix ne respecte pas le contraste WCAG AA — voici le ratio requis et 2 alternatives qui fonctionnent »', score: 3 },
+      { text: '« C\'est ton design, fais comme tu le sens »', score: 0 },
+      { text: 'Tu modifies directement toi-même pour gagner du temps', score: 1 },
+    ],
+  },
+  {
+    category: 'feedback',
+    text: 'Tu reçois un feedback négatif sur ton design en public. Ta réaction ?',
+    options: [
+      { text: 'Tu défends ton choix en expliquant pourquoi l\'autre se trompe', score: 0 },
+      { text: 'Tu poses des questions pour bien comprendre, tu remercies, et tu traites à tête reposée', score: 3 },
+      { text: 'Tu acceptes silencieusement pour clore le sujet', score: 1 },
+      { text: 'Tu proposes d\'en reparler en 1:1 pour ne pas exposer le désaccord', score: 2 },
+    ],
+  },
+  {
+    category: 'feedback',
+    text: 'Comment crées-tu une culture de feedback dans ton équipe ?',
+    options: [
+      { text: 'Tu attends les reviews formelles pour donner du feedback', score: 0 },
+      { text: 'Tu donnes du feedback régulier dans les deux sens, et tu modèles la façon d\'en recevoir', score: 3 },
+      { text: 'Tu t\'assures que seuls les seniors en donnent pour éviter les maladresses', score: 0 },
+      { text: 'Tu laisses le lead gérer — c\'est son rôle', score: 1 },
+    ],
+  },
+
+  // ── Écrit & oral ──
+  {
+    category: 'written_comm',
+    text: 'Tu rédiges un design doc de 4 pages. Où places-tu la recommandation finale ?',
+    options: [
+      { text: 'À la fin, en conclusion logique de ta démonstration', score: 0 },
+      { text: 'Dans un TL;DR en haut, avec les détails pour qui veut creuser', score: 3 },
+      { text: 'Au milieu, après avoir posé le contexte', score: 1 },
+      { text: 'Pas besoin de recommandation explicite, elle ressort du doc', score: 0 },
+    ],
+  },
+  {
+    category: 'written_comm',
+    text: 'Tu as un désaccord complexe avec un PM. Quel canal choisis-tu ?',
+    options: [
+      { text: 'Slack — c\'est plus rapide pour débloquer', score: 0 },
+      { text: 'Un 1:1 en visio, suivi d\'un résumé écrit des décisions prises', score: 3 },
+      { text: 'Email uniquement pour garder une trace formelle', score: 1 },
+      { text: 'Tu laisses passer pour préserver la relation', score: 0 },
+    ],
+  },
+  {
+    category: 'written_comm',
+    text: 'Un stakeholder relance pour la 3e fois sur un sujet déjà tranché. Que fais-tu ?',
+    options: [
+      { text: 'Tu réponds poliment à chaque fois sans faire référence aux échanges précédents', score: 0 },
+      { text: 'Tu renvoies vers le doc de décision existant et demandes ce qui a changé pour rouvrir le sujet', score: 3 },
+      { text: 'Tu rouvres la conversation pour lui faire plaisir', score: 0 },
+      { text: 'Tu escalades à son manager pour qu\'il arbitre', score: 1 },
+    ],
+  },
+
+  // ── Stakeholder management ──
+  {
+    category: 'stakeholders',
+    text: 'Tu arrives sur un nouveau projet. Quelle est ta première action vis-à-vis des stakeholders ?',
+    options: [
+      { text: 'Tu identifies les décideurs principaux et tu lances le travail', score: 1 },
+      { text: 'Tu fais une carte des stakeholders : qui informer, qui consulter, qui décide', score: 3 },
+      { text: 'Tu attends qu\'ils se manifestent d\'eux-mêmes', score: 0 },
+      { text: 'Tu mets tout le monde en copie de tes updates par sécurité', score: 1 },
+    ],
+  },
+  {
+    category: 'stakeholders',
+    text: 'Quand tu tiens une réunion de design review, tu…',
+    options: [
+      { text: 'Laisses la conversation se dérouler librement selon l\'énergie du groupe', score: 0 },
+      { text: 'Envoies un agenda avant, captures les décisions pendant, partages un résumé après', score: 3 },
+      { text: 'Demandes à quelqu\'un d\'autre de prendre les notes pour toi', score: 1 },
+      { text: 'Enregistres la session pour que les absents la revoient', score: 1 },
+    ],
+  },
+  {
+    category: 'stakeholders',
+    text: 'Un stakeholder senior n\'est jamais dans tes reviews mais critique tes designs en comité. Que fais-tu ?',
+    options: [
+      { text: 'Tu le classes « informer » et partages proactivement un update avant chaque jalon clé', score: 3 },
+      { text: 'Tu exiges qu\'il soit présent à la prochaine review', score: 0 },
+      { text: 'Tu ignores ses critiques — il a choisi de ne pas participer', score: 0 },
+      { text: 'Tu escalades à son n+1 pour qu\'il le recadre', score: 1 },
+    ],
+  },
+  {
+    category: 'stakeholders',
+    text: 'Comment construis-tu une relation avec un stakeholder difficile ?',
+    options: [
+      { text: 'Tu évites les interactions non essentielles pour minimiser les frictions', score: 0 },
+      { text: 'Tu cherches des moments informels et low-stakes pour comprendre ses objectifs à lui', score: 3 },
+      { text: 'Tu l\'invites systématiquement à tes reviews pour l\'impliquer', score: 1 },
+      { text: 'Tu passes par son manager pour médiatiser les échanges', score: 1 },
+    ],
+  },
+
+  // ── Ownership (shipping + independence) ──
+  {
+    category: 'ownership',
+    text: 'Tu as 2 semaines pour livrer une feature. Quel est ton premier réflexe ?',
+    options: [
+      { text: 'Tu explores toutes les options possibles, tu trancheras ensuite', score: 0 },
+      { text: 'Tu timeboxes l\'exploration à 3-4 jours puis tu t\'engages sur une direction', score: 3 },
+      { text: 'Tu attends que le PM précise le scope avant de commencer', score: 0 },
+      { text: 'Tu demandes une extension de délai dès le départ', score: 0 },
+    ],
+  },
+  {
+    category: 'ownership',
+    text: 'Ton PM te donne un brief très vague. Quelle est ta réaction ?',
+    options: [
+      { text: 'Tu attends qu\'il le clarifie avant de démarrer', score: 0 },
+      { text: 'Tu formules ta propre compréhension, tu la valides avec lui, puis tu démarres', score: 3 },
+      { text: 'Tu commences à designer en espérant tomber juste', score: 1 },
+      { text: 'Tu demandes au lead design de trancher à sa place', score: 0 },
+    ],
+  },
+  {
+    category: 'ownership',
+    text: 'Tu as identifié un problème UX que l\'équipe n\'a pas priorisé. Tu…',
+    options: [
+      { text: 'Tu le notes dans un backlog perso en attendant une ouverture', score: 1 },
+      { text: 'Tu construis un mini business case (impact, effort, métrique) pour le proposer en priorisation', score: 3 },
+      { text: 'Tu attends qu\'il remonte naturellement via le support ou les users', score: 0 },
+      { text: 'Tu le corriges en douce pendant tes autres tickets', score: 1 },
+    ],
+  },
+  {
+    category: 'ownership',
+    text: 'Une feature que tu as livrée a des problèmes en production. Ta réaction ?',
+    options: [
+      { text: 'Tu attends que l\'équipe produit décide de la suite', score: 0 },
+      { text: 'Tu t\'appropries le problème : diagnostic, hypothèse de fix, correction, post-mortem', score: 3 },
+      { text: 'Tu documentes que c\'est un problème lié aux specs côté PM', score: 0 },
+      { text: 'Tu proposes de refaire la feature entièrement', score: 1 },
+    ],
+  },
+
+  // ── Strategy ──
+  {
+    category: 'strategy',
+    text: 'Connais-tu les 3 métriques principales que ton entreprise suit ce trimestre ?',
+    options: [
+      { text: 'Oui, et je sais précisément comment mes projets y contribuent', score: 3 },
+      { text: 'Oui, mais je ne fais pas le lien direct avec mon travail', score: 1 },
+      { text: 'Partiellement — je connais les objectifs de mon équipe', score: 1 },
+      { text: 'Non, ce n\'est pas vraiment mon rôle', score: 0 },
+    ],
+  },
+  {
+    category: 'strategy',
+    text: 'Tu conçois une feature B2B. Quelle question te poses-tu en priorité ?',
+    options: [
+      { text: 'Quelle UI sera la plus moderne et travaillée', score: 0 },
+      { text: 'Comment cette feature fait gagner ou retenir des clients qui paient', score: 3 },
+      { text: 'Quelle feature équivalente proposent les concurrents', score: 1 },
+      { text: 'Ce que préfèrent les users en test', score: 1 },
+    ],
+  },
+  {
+    category: 'strategy',
+    text: 'Connais-tu le modèle économique précis de ton produit ?',
+    options: [
+      { text: 'Je sais qui paie, combien, pour quoi, et quels leviers le font grandir', score: 3 },
+      { text: 'Je sais qu\'il y a des abonnements mais pas les détails chiffrés', score: 1 },
+      { text: 'C\'est l\'affaire du PM et de la direction', score: 0 },
+      { text: 'Je sais vaguement si c\'est profitable ou pas', score: 1 },
+    ],
+  },
+  {
+    category: 'strategy',
+    text: 'Un PM te propose une feature « parce que la concurrence l\'a ». Ta réaction ?',
+    options: [
+      { text: 'OK, on la fait vite pour ne pas prendre de retard', score: 0 },
+      { text: 'Tu creuses : pourquoi eux, est-ce adapté à notre user, à notre stratégie, à notre positionnement', score: 3 },
+      { text: 'Tu refuses : c\'est du copycat sans valeur ajoutée', score: 1 },
+      { text: 'Tu la designes en mieux que chez eux', score: 1 },
+    ],
+  },
+
+  // ── Mentorship ──
+  {
+    category: 'mentorship',
+    text: 'Un designer junior galère sur un projet important. Tu…',
+    options: [
+      { text: 'Tu prends le relais pour débloquer le livrable dans les temps', score: 0 },
+      { text: 'Tu poses des questions pour qu\'il identifie lui-même ses blocages', score: 3 },
+      { text: 'Tu lui donnes directement la solution pour qu\'il apprenne en l\'appliquant', score: 1 },
+      { text: 'Tu préviens son manager pour qu\'il l\'accompagne', score: 0 },
+    ],
+  },
+  {
+    category: 'mentorship',
+    text: 'Quelle est pour toi la meilleure façon de partager ton expertise dans l\'équipe ?',
+    options: [
+      { text: 'En faisant le travail mieux que les autres — les juniors apprennent par osmose', score: 0 },
+      { text: 'En documentant tes décisions et en animant des sessions régulières de partage', score: 3 },
+      { text: 'En attendant que les juniors viennent te poser des questions', score: 1 },
+      { text: 'En corrigeant leurs livrables en reviews', score: 1 },
+    ],
+  },
+  {
+    category: 'mentorship',
+    text: 'En 1:1 avec un designer que tu mentores, tu parles surtout de…',
+    options: [
+      { text: 'Ce qu\'il a livré cette semaine', score: 1 },
+      { text: 'Ses objectifs de croissance et les opportunités concrètes pour y progresser', score: 3 },
+      { text: 'Tes propres projets pour qu\'il apprenne par exemple', score: 0 },
+      { text: 'La vie d\'équipe pour souder la relation', score: 0 },
+    ],
+  },
 ];
 
-// ── State ──
-let currentIndex = 0;
-let selectedOption = null;
-let scores = {}; // { categoryId: totalScore }
+// ─────────────────────────────────────────────────────────────────────
+// State
+// ─────────────────────────────────────────────────────────────────────
+const state = {
+  phase: 'welcome', // 'welcome' | 'quiz' | 'results'
+  targetLevel: 'senior',
+  currentIndex: 0,
+  selectedOption: null,
+  scores: {}, // { categoryId: totalScore }
+};
+CATEGORIES.forEach(c => (state.scores[c.id] = 0));
 
-CATEGORIES.forEach(c => (scores[c.id] = 0));
-
-// ── Helpers ──
+// ─────────────────────────────────────────────────────────────────────
+// Helpers
+// ─────────────────────────────────────────────────────────────────────
 function getCategoryById(id) {
   return CATEGORIES.find(c => c.id === id);
 }
-
+function getPillarById(id) {
+  return PILLARS.find(p => p.id === id);
+}
+function getCategoryMax(catId) {
+  return QUESTIONS.filter(q => q.category === catId).length * 3;
+}
 function getNormalizedScore(catId) {
-  const cat = getCategoryById(catId);
-  return Math.round((scores[catId] / cat.maxScore) * 10);
+  const max = getCategoryMax(catId);
+  if (max === 0) return 0;
+  return Math.round((state.scores[catId] / max) * 10);
 }
-
-function getInterpretation(score) {
-  if (score >= 9) return { label: 'Expert',        cls: 'badge-expert' };
-  if (score >= 7) return { label: 'Maîtrisé',      cls: 'badge-maitrise' };
-  if (score >= 4) return { label: 'En progression', cls: 'badge-progres' };
-  return              { label: 'À renforcer',    cls: 'badge-renforcer' };
+function getPillarScore(pillarId) {
+  const cats = CATEGORIES.filter(c => c.pillar === pillarId);
+  if (!cats.length) return 0;
+  const avg = cats.reduce((sum, c) => sum + getNormalizedScore(c.id), 0) / cats.length;
+  return Math.round(avg * 10) / 10;
 }
-
+function getCategoryTarget(cat) {
+  return cat.targets[state.targetLevel];
+}
+function getInterpretation(score, target) {
+  const delta = score - target;
+  if (delta >= 1)  return { label: 'Au-dessus', cls: 'badge-expert' };
+  if (delta >= 0)  return { label: 'Au niveau', cls: 'badge-maitrise' };
+  if (delta >= -2) return { label: 'Proche',    cls: 'badge-progres' };
+  return             { label: 'À renforcer', cls: 'badge-renforcer' };
+}
 function getLetter(i) { return ['A', 'B', 'C', 'D'][i]; }
 
-// ── Render: Welcome ──
+function getCssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// Theme
+// ─────────────────────────────────────────────────────────────────────
+let chartInstance = null;
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('mapux-theme', next);
+  // Redraw chart if on results screen so colors follow the theme
+  if (state.phase === 'results' && document.getElementById('radar-chart')) {
+    if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+    drawRadarChart();
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// Render: Welcome
+// ─────────────────────────────────────────────────────────────────────
 function renderWelcome() {
   const app = document.getElementById('app');
-  const chips = CATEGORIES.map(c => `
+  const pillarChips = PILLARS.map(p => `
     <div class="cat-chip">
-      <div class="cat-dot" style="background:${c.color}"></div>
-      ${c.label}
+      <div class="cat-dot" style="background:${p.color}"></div>
+      ${p.label}
     </div>
+  `).join('');
+
+  const levelCards = Object.values(LEVELS).map(lv => `
+    <button
+      class="level-card${state.targetLevel === lv.id ? ' selected' : ''}"
+      data-level="${lv.id}"
+      onclick="selectLevel('${lv.id}')"
+    >
+      <div class="level-card-head">
+        <div class="level-card-title">${lv.label}</div>
+        <div class="level-card-check" aria-hidden="true">✓</div>
+      </div>
+      <div class="level-card-desc">${lv.description}</div>
+    </button>
   `).join('');
 
   app.innerHTML = `
     <div class="welcome">
-      <div class="welcome-badge">✦ Self-Assessment</div>
-      <h1>Où en sont tes<br/><span>hard skills UX ?</span></h1>
-      <p>40 questions pour cartographier tes compétences UX et visualiser tes points forts et tes axes de progression.</p>
+      <div class="welcome-badge">✦ Self-Assessment · d'après Artiom Dashinsky</div>
+      <h1>Où en est ton <span>potentiel senior ?</span></h1>
+      <p>${QUESTIONS.length} questions pour cartographier tes compétences design au-delà de la craft — communication, collaboration, ownership, stratégie, mentorat.</p>
+
       <div class="welcome-stats">
-        <div class="stat"><div class="stat-value">40</div><div class="stat-label">Questions</div></div>
-        <div class="stat"><div class="stat-value">8</div><div class="stat-label">Compétences</div></div>
+        <div class="stat"><div class="stat-value">${QUESTIONS.length}</div><div class="stat-label">Questions</div></div>
+        <div class="stat"><div class="stat-value">${PILLARS.length}</div><div class="stat-label">Pillars</div></div>
         <div class="stat"><div class="stat-value">~15</div><div class="stat-label">Minutes</div></div>
       </div>
-      <div class="categories-preview">${chips}</div>
+
+      <div class="categories-preview">${pillarChips}</div>
+
+      <div class="level-picker">
+        <div class="level-picker-label">Quel niveau vises-tu ?</div>
+        <div class="level-picker-grid">${levelCards}</div>
+      </div>
+
       <button class="btn btn-primary" onclick="startQuiz()">Commencer le quiz →</button>
     </div>
   `;
 }
 
-// ── Render: Question ──
+function selectLevel(id) {
+  state.targetLevel = id;
+  document.querySelectorAll('.level-card').forEach(el => {
+    el.classList.toggle('selected', el.dataset.level === id);
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// Render: Question
+// ─────────────────────────────────────────────────────────────────────
 function renderQuestion() {
   const app = document.getElementById('app');
-  const q = QUESTIONS[currentIndex];
+  const q = QUESTIONS[state.currentIndex];
   const cat = getCategoryById(q.category);
+  const pillar = getPillarById(cat.pillar);
   const total = QUESTIONS.length;
-  const progress = Math.round((currentIndex / total) * 100);
+  const progress = Math.round((state.currentIndex / total) * 100);
 
   const options = q.options.map((opt, i) => `
     <button
-      class="option${selectedOption === i ? ' selected' : ''}"
+      class="option${state.selectedOption === i ? ' selected' : ''}"
       onclick="selectAnswer(${i})"
     >
       <div class="option-letter">${getLetter(i)}</div>
@@ -508,90 +993,187 @@ function renderQuestion() {
     <div class="quiz-card">
       <div class="quiz-header">
         <div class="progress-info">
-          <span class="progress-label">${cat.label}</span>
-          <span class="progress-count">${currentIndex + 1} / ${total}</span>
+          <span class="progress-label" style="color:${pillar.color}">${pillar.label} · ${cat.label}</span>
+          <span class="progress-count">${state.currentIndex + 1} / ${total}</span>
         </div>
         <div class="progress-bar-track">
-          <div class="progress-bar-fill" style="width: ${progress}%"></div>
+          <div class="progress-bar-fill" style="width: ${progress}%; background:${pillar.color}"></div>
         </div>
       </div>
       <div class="quiz-body">
-        <div class="question-category" style="background:${cat.color}22; color:${cat.color}">
+        <div class="question-category" style="background:${pillar.color}1A; color:${pillar.color}">
           ${cat.label}
         </div>
         <div class="question-text">${q.text}</div>
         <div class="options">${options}</div>
       </div>
       <div class="quiz-footer">
-        <button class="btn btn-primary" id="btn-next" onclick="nextQuestion()" ${selectedOption === null ? 'disabled' : ''}>
-          ${currentIndex < QUESTIONS.length - 1 ? 'Suivant →' : 'Voir mes résultats →'}
+        <button class="btn btn-ghost" onclick="prevQuestion()" ${state.currentIndex === 0 ? 'disabled' : ''}>
+          ← Précédent
+        </button>
+        <button class="btn btn-primary" id="btn-next" onclick="nextQuestion()" ${state.selectedOption === null ? 'disabled' : ''}>
+          ${state.currentIndex < QUESTIONS.length - 1 ? 'Suivant →' : 'Voir mes résultats →'}
         </button>
       </div>
     </div>
   `;
 }
 
-// ── Render: Results ──
+// ─────────────────────────────────────────────────────────────────────
+// Render: Results
+// ─────────────────────────────────────────────────────────────────────
 function renderResults() {
   const app = document.getElementById('app');
+  const level = LEVELS[state.targetLevel];
 
-  const normalizedScores = CATEGORIES.map(c => getNormalizedScore(c.id));
-
-  const cards = CATEGORIES.map((cat, i) => {
-    const score = normalizedScores[i];
-    const interp = getInterpretation(score);
+  // Pillar sections
+  const pillarSections = PILLARS.map(p => {
+    const cats = CATEGORIES.filter(c => c.pillar === p.id);
+    const pillarScore = getPillarScore(p.id);
+    const cards = cats.map(c => {
+      const score = getNormalizedScore(c.id);
+      const target = getCategoryTarget(c);
+      const interp = getInterpretation(score, target);
+      return `
+        <div class="score-card">
+          <div class="score-card-header">
+            <div class="score-card-dot" style="background:${p.color}"></div>
+            <div class="score-card-label">${c.label}</div>
+            <div class="score-card-value">${score}<span class="score-card-target">/${target}</span></div>
+          </div>
+          <div class="score-bar-track">
+            <div class="score-bar-fill" style="width:${score * 10}%; background:${p.color}"></div>
+            <div class="score-bar-target" style="left:${target * 10}%"></div>
+          </div>
+          <span class="score-badge ${interp.cls}">${interp.label}</span>
+        </div>
+      `;
+    }).join('');
     return `
-      <div class="score-card">
-        <div class="score-card-header">
-          <div class="score-card-dot" style="background:${cat.color}"></div>
-          <div class="score-card-label">${cat.label}</div>
-          <div class="score-card-value">${score}/10</div>
+      <div class="pillar-section">
+        <div class="pillar-section-head">
+          <div class="pillar-section-title">
+            <div class="pillar-dot" style="background:${p.color}"></div>
+            <h3>${p.label}</h3>
+            <div class="pillar-score" style="color:${p.color}">${pillarScore}/10</div>
+          </div>
+          <p class="pillar-tagline">${p.tagline}</p>
         </div>
-        <div class="score-bar-track">
-          <div class="score-bar-fill" style="width:${score * 10}%; background:${cat.color}"></div>
-        </div>
-        <span class="score-badge ${interp.cls}">${interp.label}</span>
+        <div class="scores-grid">${cards}</div>
       </div>
     `;
   }).join('');
 
+  // Growth priorities : gap × pillar weight
+  const priorities = CATEGORIES
+    .map(c => {
+      const score = getNormalizedScore(c.id);
+      const target = getCategoryTarget(c);
+      const gap = Math.max(0, target - score);
+      const pillar = getPillarById(c.pillar);
+      return { cat: c, pillar, score, target, gap, priority: gap * pillar.weight };
+    })
+    .filter(p => p.gap > 0)
+    .sort((a, b) => b.priority - a.priority)
+    .slice(0, 5);
+
+  const priorityCards = priorities.length
+    ? priorities.map((p, i) => `
+        <div class="priority-card">
+          <div class="priority-rank" style="background:${p.pillar.color}">${i + 1}</div>
+          <div class="priority-body">
+            <div class="priority-head">
+              <div class="priority-label">${p.cat.label}</div>
+              <div class="priority-meta">
+                <span class="priority-pillar" style="color:${p.pillar.color}">${p.pillar.label}</span>
+                <span class="priority-gap">${p.score} → ${p.target}</span>
+              </div>
+            </div>
+            <ul class="priority-tips">
+              ${p.cat.tips.map(t => `<li>${t}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+      `).join('')
+    : `<div class="priority-empty">Tu es au niveau ou au-dessus de la cible sur toutes les compétences. Vise le niveau supérieur 💪</div>`;
+
   app.innerHTML = `
     <div class="results">
       <div class="results-header">
-        <h2>Tes résultats ✦</h2>
-        <p>Voici une carte de tes compétences UX actuelles</p>
+        <div class="results-level-badge">Cible : ${level.label}</div>
+        <h2>Ta carte de compétences</h2>
+        <p>Comparée aux attentes industrie pour un·e ${level.short}. Les barres grises marquent ton niveau cible.</p>
       </div>
+
       <div class="chart-container">
         <canvas id="radar-chart"></canvas>
       </div>
-      <div class="scores-grid">${cards}</div>
+
+      <div class="priorities-block">
+        <div class="priorities-head">
+          <h3>Top ${priorities.length || 5} priorités de croissance</h3>
+          <p>Calculé selon l'écart à ta cible × l'importance du pillar dans l'industrie.</p>
+        </div>
+        <div class="priorities-list">${priorityCards}</div>
+      </div>
+
+      ${pillarSections}
+
       <div class="results-actions">
         <button class="btn btn-ghost" onclick="restartQuiz()">↩ Recommencer</button>
       </div>
     </div>
   `;
 
-  drawRadarChart(normalizedScores);
+  drawRadarChart();
 }
 
-function drawRadarChart(data) {
+function drawRadarChart() {
   const ctx = document.getElementById('radar-chart').getContext('2d');
-  new Chart(ctx, {
+  const scores = PILLARS.map(p => getPillarScore(p.id));
+  const targets = PILLARS.map(p => {
+    const cats = CATEGORIES.filter(c => c.pillar === p.id);
+    const avg = cats.reduce((sum, c) => sum + getCategoryTarget(c), 0) / cats.length;
+    return Math.round(avg * 10) / 10;
+  });
+
+  const primary      = getCssVar('--primary');
+  const chartGrid    = getCssVar('--chart-grid');
+  const chartLabel   = getCssVar('--chart-label');
+  const chartTick    = getCssVar('--chart-tick');
+  const targetLine   = getCssVar('--chart-target-line');
+  const targetFill   = getCssVar('--chart-target-fill');
+  const youFill      = getCssVar('--chart-you-fill');
+  const pointBorder  = getCssVar('--surface');
+
+  chartInstance = new Chart(ctx, {
     type: 'radar',
     data: {
-      labels: CATEGORIES.map(c => c.label),
-      datasets: [{
-        label: 'Ton niveau',
-        data,
-        backgroundColor: 'rgba(91, 76, 245, 0.15)',
-        borderColor: '#5B4CF5',
-        borderWidth: 2.5,
-        pointBackgroundColor: CATEGORIES.map(c => c.color),
-        pointBorderColor: '#fff',
-        pointBorderWidth: 2,
-        pointRadius: 6,
-        pointHoverRadius: 8,
-      }],
+      labels: PILLARS.map(p => p.label),
+      datasets: [
+        {
+          label: 'Cible',
+          data: targets,
+          backgroundColor: targetFill,
+          borderColor: targetLine,
+          borderWidth: 1.5,
+          borderDash: [5, 4],
+          pointRadius: 0,
+          pointHoverRadius: 0,
+        },
+        {
+          label: 'Toi',
+          data: scores,
+          backgroundColor: youFill,
+          borderColor: primary,
+          borderWidth: 2.5,
+          pointBackgroundColor: PILLARS.map(p => p.color),
+          pointBorderColor: pointBorder,
+          pointBorderWidth: 2,
+          pointRadius: 6,
+          pointHoverRadius: 8,
+        },
+      ],
     },
     options: {
       responsive: true,
@@ -602,60 +1184,89 @@ function drawRadarChart(data) {
           ticks: {
             stepSize: 2,
             font: { size: 11, family: 'Inter' },
-            color: '#6B63A0',
+            color: chartTick,
             backdropColor: 'transparent',
           },
-          grid: { color: '#E4E2F8' },
-          angleLines: { color: '#E4E2F8' },
+          grid: { color: chartGrid },
+          angleLines: { color: chartGrid },
           pointLabels: {
             font: { size: 12, family: 'Inter', weight: '600' },
-            color: '#1A1033',
+            color: chartLabel,
           },
         },
       },
       plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: ctx => ` ${ctx.raw}/10`,
-          },
+        legend: {
+          display: true,
+          position: 'bottom',
+          labels: { color: chartLabel, font: { size: 12, family: 'Inter' }, usePointStyle: true, padding: 14 },
         },
+        tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label} : ${ctx.raw}/10` } },
       },
     },
   });
 }
 
-// ── Actions ──
+// ─────────────────────────────────────────────────────────────────────
+// Actions
+// ─────────────────────────────────────────────────────────────────────
 function startQuiz() {
-  currentIndex = 0;
-  selectedOption = null;
-  CATEGORIES.forEach(c => (scores[c.id] = 0));
+  state.phase = 'quiz';
+  state.currentIndex = 0;
+  state.selectedOption = null;
+  CATEGORIES.forEach(c => (state.scores[c.id] = 0));
+  // Track answer indices to allow back navigation
+  state.answers = new Array(QUESTIONS.length).fill(null);
   renderQuestion();
 }
 
 function selectAnswer(i) {
-  selectedOption = i;
-  renderQuestion();
+  state.selectedOption = i;
+  document.querySelectorAll('.option').forEach((el, idx) => {
+    el.classList.toggle('selected', idx === i);
+  });
+  const btn = document.getElementById('btn-next');
+  if (btn) btn.disabled = false;
 }
 
 function nextQuestion() {
-  if (selectedOption === null) return;
-  const q = QUESTIONS[currentIndex];
-  scores[q.category] += q.options[selectedOption].score;
+  if (state.selectedOption === null) return;
+  const q = QUESTIONS[state.currentIndex];
 
-  currentIndex++;
-  selectedOption = null;
+  // Undo previous answer for this question if going through again
+  const prev = state.answers[state.currentIndex];
+  if (prev !== null) {
+    state.scores[q.category] -= q.options[prev].score;
+  }
+  state.scores[q.category] += q.options[state.selectedOption].score;
+  state.answers[state.currentIndex] = state.selectedOption;
 
-  if (currentIndex >= QUESTIONS.length) {
+  state.currentIndex++;
+  state.selectedOption = state.answers[state.currentIndex] ?? null;
+
+  if (state.currentIndex >= QUESTIONS.length) {
+    state.phase = 'results';
     renderResults();
   } else {
     renderQuestion();
   }
 }
 
+function prevQuestion() {
+  if (state.currentIndex === 0) return;
+  state.currentIndex--;
+  state.selectedOption = state.answers[state.currentIndex] ?? null;
+  renderQuestion();
+}
+
 function restartQuiz() {
+  state.phase = 'welcome';
+  state.selectedOption = null;
+  CATEGORIES.forEach(c => (state.scores[c.id] = 0));
   renderWelcome();
 }
 
-// ── Init ──
+// ─────────────────────────────────────────────────────────────────────
+// Init
+// ─────────────────────────────────────────────────────────────────────
 renderWelcome();
