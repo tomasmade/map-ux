@@ -39,132 +39,242 @@ const CATEGORIES = [
   {
     id: 'research', pillar: 'craft', label: 'Recherche utilisateur',
     targets: { mid: 5, senior: 7, staff: 8 },
-    tips: [
-      'Pars d\'hypothèses à valider, pas d\'une liste de questions ouvertes.',
-      'Triangule quali + quanti pour convaincre les stakeholders sceptiques.',
+    behaviors: [
+      'Mets tes hypothèses par écrit avant chaque session — ne commence jamais sans elles.',
+      'Débrieffe à chaud après chaque entretien (15 min) pour capturer les impressions fraîches.',
+      'Lis une étude ou article sur les méthodos de recherche chaque mois.',
+      'Demande du feedback sur tes guides d\'entretien à un pair avant de les utiliser.',
     ],
+    actions: [
+      'Sur ton prochain projet, liste 3 hypothèses à valider et choisis la méthode adaptée à chacune.',
+      'Crée un template de synthèse réutilisable (patterns récurrents, insights, recommandations).',
+      'Présente tes findings dans un format court (5 min max) pour pratiquer la synthèse percutante.',
+    ],
+    bookRef: { chapter: 12, title: 'Tools & Processes' },
   },
   {
     id: 'ia', pillar: 'craft', label: 'Architecture de l\'info',
     targets: { mid: 5, senior: 7, staff: 8 },
-    tips: [
-      'Teste ton arborescence avec un outil de tree testing (Treejack).',
-      'Analyse les logs de recherche avant de redesigner une navigation.',
+    behaviors: [
+      'Analyse les logs de recherche interne pour comprendre les vrais patterns de navigation.',
+      'Questionne les étiquettes : sont-elles dans le vocabulaire réel de tes users ?',
+      'Pratique des card sorts et tree tests régulièrement, même sur de petits sujets.',
     ],
+    actions: [
+      'Fais un audit de navigation rapide du produit actuel : identifie les 3 frictions principales.',
+      'Teste ton arborescence avec Treejack (ou équivalent) avant le prochain redesign.',
+      'Crée un glossaire des termes utilisés par tes users vs ceux utilisés en interne.',
+    ],
+    bookRef: { chapter: 12, title: 'Tools & Processes' },
   },
   {
     id: 'proto', pillar: 'craft', label: 'Wireframing & Proto',
     targets: { mid: 6, senior: 8, staff: 9 },
-    tips: [
-      'Basse fidélité en exploration, haute fidélité pour valider les détails d\'interaction.',
-      'Maîtrise variables, components avancés et prototypes complexes dans Figma.',
+    behaviors: [
+      'Explore en basse fidélité, valide les détails d\'interaction en haute — ne mélange pas les deux.',
+      'Maîtrise une nouvelle fonctionnalité Figma (variables, components avancés) chaque mois.',
+      'Pratique le prototypage rapide : idée → prototype testable en moins d\'une journée.',
     ],
+    actions: [
+      'Sur ton prochain projet, définis explicitement le niveau de fidélité avant de commencer.',
+      'Documente ton système de composants pour qu\'un autre designer puisse l\'utiliser sans toi.',
+      'Crée un kit de prototypage personnel avec tes patterns les plus réutilisables.',
+    ],
+    bookRef: { chapter: 12, title: 'Tools & Processes' },
   },
   {
     id: 'ds', pillar: 'craft', label: 'Design System',
     targets: { mid: 4, senior: 7, staff: 8 },
-    tips: [
-      'Audite l\'existant dans le produit avant de créer un composant.',
-      'Versionne ton DS en semver avec un changelog lisible par les équipes.',
+    behaviors: [
+      'Avant de créer un composant, audite ce qui existe déjà dans le produit et le DS.',
+      'Documente chaque nouveau composant avec ses use cases, variants et do/don\'ts.',
+      'Participe aux discussions DS même quand ce n\'est pas ton projet principal.',
     ],
+    actions: [
+      'Fais un audit DS : identifie les composants dupliqués, inconsistants ou manquants.',
+      'Propose un process de contribution clair (qui décide, comment soumettre, comment tester).',
+      'Versionne ton DS avec un changelog lisible par les développeurs.',
+    ],
+    bookRef: { chapter: 12, title: 'Tools & Processes' },
   },
   {
     id: 'testing', pillar: 'craft', label: 'Tests utilisateurs',
     targets: { mid: 5, senior: 7, staff: 8 },
-    tips: [
-      'Priorise les findings par fréquence × impact, pas par verbatim frappant.',
-      'Combine tests modérés (profondeur) et non modérés (volume) selon la question.',
+    behaviors: [
+      'Priorise les findings par fréquence × sévérité — pas par le verbatim le plus marquant.',
+      'Alterne tests modérés (profondeur) et non modérés (volume) selon la question à valider.',
+      'Partage tes findings dans les 48h après le test — la fraîcheur compte.',
     ],
+    actions: [
+      'Avant ton prochain test, définis un critère de succès avant de commencer (pas après).',
+      'Crée un template de rapport partageable (méthode, participants, insights, recommandations).',
+      'Intègre au moins un insight de test utilisateur dans chaque sprint review.',
+    ],
+    bookRef: { chapter: 12, title: 'Tools & Processes' },
   },
   {
     id: 'a11y', pillar: 'craft', label: 'Accessibilité',
     targets: { mid: 5, senior: 7, staff: 8 },
-    tips: [
-      'Intègre l\'accessibilité dès le wireframe, pas en fin de process.',
-      'Teste avec lecteur d\'écran + navigation clavier, pas seulement Lighthouse.',
+    behaviors: [
+      'Vérifie le contraste et la hiérarchie visuelle dès le wireframe — pas en fin de process.',
+      'Teste avec navigation clavier et lecteur d\'écran (VoiceOver / NVDA) sur chaque livrable.',
+      'Inclus les considérations a11y dans tes specs de handoff systématiquement.',
     ],
+    actions: [
+      'Fais un audit a11y rapide du produit actuel (axe / Lighthouse) et priorise 3 corrections.',
+      'Passe une heure à naviguer le produit uniquement au clavier — sans souris.',
+      'Propose un checklist a11y à intégrer dans le process de review design de ton équipe.',
+    ],
+    bookRef: { chapter: 12, title: 'Tools & Processes' },
   },
   {
     id: 'uxwriting', pillar: 'craft', label: 'UX Writing',
     targets: { mid: 4, senior: 6, staff: 7 },
-    tips: [
-      'Utilise le vocabulaire réel de tes users (insights research), pas le jargon interne.',
-      'Distingue voix (constante, incarnant la marque) et ton (qui s\'adapte au contexte).',
+    behaviors: [
+      'Utilise le vocabulaire de tes users (issu des entretiens, du support) — pas le jargon interne.',
+      'Distingue voix (constante, marque) et ton (adapté au contexte) dans chaque interface.',
+      'Relis chaque libellé UI en te demandant : est-ce que ça aide l\'user à agir ?',
     ],
+    actions: [
+      'Fais un audit des microtextes : identifie les termes confus, techniques ou incohérents.',
+      'Crée un guide de tone of voice minimal (3-4 principes) pour aligner ton équipe.',
+      'Teste la compréhension de tes textes UI avec 3 users lors du prochain test usability.',
+    ],
+    bookRef: { chapter: 12, title: 'Tools & Processes' },
   },
   {
     id: 'data', pillar: 'craft', label: 'Data & Analytics',
     targets: { mid: 4, senior: 7, staff: 8 },
-    tips: [
-      'Jamais de conclusion sur une métrique sans son contexte.',
-      'Combine données comportementales + insights quali + impact business pour convaincre.',
+    behaviors: [
+      'Identifie les 2-3 métriques qui mesureront le succès de chaque projet avant de commencer.',
+      'Lis les dashboards analytics du produit au moins une fois par semaine.',
+      'Ne présente jamais une métrique sans son contexte (comparatif, trend, baseline).',
     ],
+    actions: [
+      'Apprends à formuler une requête SQL basique pour extraire tes propres données.',
+      'Construis un dashboard simple qui relie tes décisions design aux métriques business.',
+      'Présente les résultats de la dernière feature livrée : data quanti + insight quali combinés.',
+    ],
+    bookRef: { chapter: 12, title: 'Tools & Processes' },
   },
 
   // ── COMMUNICATION ────────────────────────────────────────────────
   {
     id: 'presenting', pillar: 'communication', label: 'Présenter son design',
     targets: { mid: 5, senior: 8, staff: 9 },
-    tips: [
-      'Structure tes présentations : contexte → problème → hypothèse → solution → rationale → next steps.',
-      'Adapte le niveau de détail à l\'audience : recommandation d\'abord pour les execs, détails pour les peers.',
+    behaviors: [
+      'Présente ton travail fréquemment — même les WIPs, même les projets en cours.',
+      'Demande activement du feedback après chaque présentation (qu\'est-ce qui était clair ? confus ?).',
+      'Développe ta confiance face à un public : présente en interne avant les réunions importantes.',
+      'Applique le storytelling : relie ton design à un problème réel et à un résultat attendu.',
     ],
+    actions: [
+      'Structure ta prochaine présentation : contexte → problème → hypothèse → solution → rationale → next steps.',
+      'Pour les execs, commence par la recommandation — mets les détails en backup à la fin.',
+      'Enregistre-toi en train de présenter une fois ce mois-ci et réécoute pour identifier tes points à améliorer.',
+    ],
+    bookRef: { chapter: 13, title: 'Communicating Design' },
   },
   {
     id: 'feedback', pillar: 'communication', label: 'Feedback',
     targets: { mid: 5, senior: 7, staff: 9 },
-    tips: [
-      'Sépare les faits (data, WCAG, patterns) des opinions quand tu donnes du feedback.',
-      'Quand tu en reçois : pose des questions, ne défends pas à chaud, traite à tête reposée.',
+    behaviors: [
+      'Sépare faits objectifs (data, WCAG, patterns) des opinions quand tu donnes du feedback.',
+      'Quand tu reçois du feedback, pose des questions plutôt que de défendre immédiatement.',
+      'Présente ton travail régulièrement pour créer des opportunités de feedback.',
+      'Deviens à l\'aise pour challenger des idées en réunion — c\'est de la rigueur, pas de l\'arrogance.',
     ],
+    actions: [
+      'La prochaine fois que tu reçois un feedback difficile, attends 24h avant de répondre.',
+      'Propose un format de critique design régulier dans ton équipe (crits hebdo ou bi-weekly).',
+      'Prépare 2-3 questions à poser après ta prochaine présentation pour structurer le feedback reçu.',
+    ],
+    bookRef: { chapter: 14, title: 'Feedback' },
   },
   {
     id: 'written_comm', pillar: 'communication', label: 'Écrit & oral',
     targets: { mid: 5, senior: 7, staff: 8 },
-    tips: [
-      'Commence tes docs par un TL;DR — les détails sont là pour qui veut creuser.',
-      'Async-first pour les décisions complexes : laisse une trace écrite consultable.',
+    behaviors: [
+      'Commence tes documents par un TL;DR — les détails sont pour ceux qui veulent creuser.',
+      'Favorise l\'async pour les décisions complexes : laisse une trace écrite consultable.',
+      'Relis chaque message important en te demandant : est-ce clair pour quelqu\'un sans le contexte ?',
     ],
+    actions: [
+      'Crée un template de design brief réutilisable pour structurer chaque projet.',
+      'Écris un retex sur ton dernier projet terminé et partage-le en interne.',
+      'Améliore le dernier doc que tu as écrit : intro courte, sections claires, call-to-action explicite.',
+    ],
+    bookRef: { chapter: 15, title: 'Written & Oral Communication' },
   },
 
   // ── COLLABORATION ────────────────────────────────────────────────
   {
     id: 'stakeholders', pillar: 'collaboration', label: 'Stakeholder management',
     targets: { mid: 4, senior: 7, staff: 9 },
-    tips: [
-      'Construis une carte de tes stakeholders : qui informer, qui consulter, qui décide.',
-      'Investis dans la relation dans des moments low-stakes, pas seulement quand tu as besoin d\'eux.',
+    behaviors: [
+      'Assure-toi que tout le monde a une voix dans tes discussions — gère équitablement l\'air time.',
+      'Dirige les discussions vers des outcomes concrets, pas des échanges sans fin.',
+      'Communique les mauvaises nouvelles tôt — pas quand il est trop tard pour agir.',
+      'Investis dans les relations en dehors des moments de crise ou de besoin.',
     ],
+    actions: [
+      'Crée une table de stakeholders pour ton projet actuel : qui informer, qui consulter, qui décide.',
+      'Identifie un stakeholder avec qui tu as peu de contact et planifie un 1:1 informel.',
+      'Avant ta prochaine grande présentation, brief individuellement les décideurs clés en amont.',
+    ],
+    bookRef: { chapter: 16, title: 'Stakeholder Management' },
   },
 
   // ── OWNERSHIP ────────────────────────────────────────────────────
   {
     id: 'ownership', pillar: 'ownership', label: 'Shipping & indépendance',
     targets: { mid: 6, senior: 8, staff: 9 },
-    tips: [
-      'Timebox ton exploration puis engage-toi sur une direction — l\'excellence bloque le shipping.',
-      'Face à un brief vague : formule ta compréhension, valide-la, puis démarre sans attendre.',
+    behaviors: [
+      'Débloque proactivement les autres — ne laisse pas un blocage traîner plus d\'une journée.',
+      'Sois décisif·ve : quand tu as assez de données, engage-toi sur une direction.',
+      'Gère tes dépendances en amont — identifie qui peut bloquer ton projet et contacte-les tôt.',
+      'Prends la responsabilité des échecs, même partiels — sans chercher à esquiver.',
     ],
+    actions: [
+      'Sur ton projet actuel, identifie les 3 décisions en attente et pousse à les résoudre cette semaine.',
+      'Face au prochain brief vague, rédige ta compréhension en 5 lignes et envoie-la pour validation avant de démarrer.',
+      'Sur le prochain projet, décompose les tâches en estimations et compare ta prédiction à la réalité.',
+    ],
+    bookRef: { chapter: 17, title: 'Shipping & Independence' },
   },
 
   // ── STRATEGY ─────────────────────────────────────────────────────
   {
     id: 'strategy', pillar: 'strategy', label: 'Business & Strategy',
     targets: { mid: 3, senior: 6, staff: 9 },
-    tips: [
-      'Apprends les 3 métriques business du trimestre et articule ton impact dessus.',
-      'Creuse le modèle économique : qui paie, combien, pour quoi, quels leviers le font grandir.',
+    behaviors: [
+      'Relie systématiquement tes décisions design à un objectif business mesurable.',
+      'Lis les OKRs, communications publiques ou earnings reports de ton entreprise chaque trimestre.',
+      'Prends du recul et considère le contexte business + industrie, pas seulement les specs.',
     ],
+    actions: [
+      'Apprends les 3 métriques business du trimestre et articule comment ton travail les impacte.',
+      'Fais une analyse concurrente : 3 produits qui résolvent le même problème, qu\'est-ce qu\'ils font mieux ?',
+      'Dans ta prochaine présentation, ajoute un slide "impact business estimé" de ta solution.',
+    ],
+    bookRef: { chapter: 19, title: 'Strategy' },
   },
 
   // ── MENTORSHIP ───────────────────────────────────────────────────
   {
     id: 'mentorship', pillar: 'mentorship', label: 'Mentorat',
     targets: { mid: 2, senior: 6, staff: 8 },
-    tips: [
-      'Utilise des questions ouvertes pour débloquer, pas des solutions toutes faites.',
-      'Documente tes décisions et anime des sessions de partage pour scaler ta connaissance.',
+    behaviors: [
+      'Identifie des opportunités de croissance pour tes collègues et partage-les proactivement.',
+      'Utilise des questions ouvertes pour débloquer les juniors — ne donne pas la solution directement.',
+      'Documente tes décisions et leur rationale pour scaler ta connaissance.',
     ],
+    actions: [
+      'Propose de mentorer un·e junior sur une compétence que tu maîtrises — même 30 min bi-weekly.',
+      'Anime une session de partage (lunch & learn) sur un sujet que tu maîtrises dans ton équipe.',
+      'Écris un article interne ou doc partageable sur une leçon apprise récemment.',
+    ],
+    bookRef: { chapter: 20, title: 'Mentorship' },
   },
 ];
 
@@ -852,6 +962,8 @@ const state = {
   currentIndex: 0,
   selectedOption: null,
   scores: {}, // { categoryId: totalScore }
+  answers: [],
+  optionOrder: [], // per-question shuffled indices into q.options
 };
 CATEGORIES.forEach(c => (state.scores[c.id] = 0));
 
@@ -890,8 +1002,70 @@ function getInterpretation(score, target) {
 }
 function getLetter(i) { return ['A', 'B', 'C', 'D'][i]; }
 
+// Fisher-Yates shuffle (non-destructive)
+function shuffled(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 function getCssVar(name) {
   return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
+function getTimeline(gap) {
+  if (gap <= 2) return { label: '1-2 mois',  cls: 'timeline-short' };
+  if (gap <= 4) return { label: '3-6 mois',  cls: 'timeline-medium' };
+  return             { label: '6-12 mois', cls: 'timeline-long' };
+}
+
+function getTopPriorities(max = 5) {
+  return CATEGORIES
+    .map(c => {
+      const score  = getNormalizedScore(c.id);
+      const target = getCategoryTarget(c);
+      const gap    = Math.max(0, target - score);
+      const pillar = getPillarById(c.pillar);
+      return { cat: c, pillar, score, target, gap, priority: gap * pillar.weight };
+    })
+    .filter(p => p.gap > 0)
+    .sort((a, b) => b.priority - a.priority)
+    .slice(0, max);
+}
+
+function copyGrowthPlan() {
+  const level      = LEVELS[state.targetLevel];
+  const priorities = getTopPriorities();
+  const date       = new Date().toLocaleDateString('fr-FR');
+
+  let text = `# Mon plan de croissance — Cible : ${level.label}\n`;
+  text    += `Généré le ${date}\n\n`;
+
+  priorities.forEach((p, i) => {
+    text += `## ${i + 1}. ${p.cat.label}  (${p.pillar.label})\n`;
+    text += `Score actuel : ${p.score}/10  →  Cible : ${p.target}/10  |  Horizon : ${getTimeline(p.gap).label}\n\n`;
+    text += `### Pratiques hebdomadaires\n`;
+    p.cat.behaviors.forEach(b => { text += `- ${b}\n`; });
+    text += `\n### Actions immédiates\n`;
+    p.cat.actions.forEach(a => { text += `- ${a}\n`; });
+    text += `\n📖 Réf. Ch. ${p.cat.bookRef.chapter} — ${p.cat.bookRef.title}\n\n---\n\n`;
+  });
+
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.btn-copy-plan');
+    if (btn) {
+      const prev = btn.innerHTML;
+      btn.innerHTML = 'Copié ✓';
+      btn.disabled  = true;
+      setTimeout(() => { btn.innerHTML = prev; btn.disabled = false; }, 2200);
+    }
+  }).catch(() => {
+    const btn = document.querySelector('.btn-copy-plan');
+    if (btn) { btn.innerHTML = 'Erreur — autoriser le presse-papier'; setTimeout(() => { btn.innerHTML = 'Copier le plan ↗'; }, 2200); }
+  });
 }
 
 // ─────────────────────────────────────────────────────────────────────
@@ -979,15 +1153,21 @@ function renderQuestion() {
   const total = QUESTIONS.length;
   const progress = Math.round((state.currentIndex / total) * 100);
 
-  const options = q.options.map((opt, i) => `
-    <button
-      class="option${state.selectedOption === i ? ' selected' : ''}"
-      onclick="selectAnswer(${i})"
-    >
-      <div class="option-letter">${getLetter(i)}</div>
-      <div class="option-text">${opt.text}</div>
-    </button>
-  `).join('');
+  const order = state.optionOrder[state.currentIndex]
+    || q.options.map((_, i) => i); // fallback if quiz state wasn't initialised
+  const options = order.map((origIdx, displayIdx) => {
+    const opt = q.options[origIdx];
+    const isSelected = state.selectedOption === origIdx;
+    return `
+      <button
+        class="option${isSelected ? ' selected' : ''}"
+        onclick="selectAnswer(${origIdx})"
+      >
+        <div class="option-letter">${getLetter(displayIdx)}</div>
+        <div class="option-text">${opt.text}</div>
+      </button>
+    `;
+  }).join('');
 
   app.innerHTML = `
     <div class="quiz-card">
@@ -1064,37 +1244,45 @@ function renderResults() {
     `;
   }).join('');
 
-  // Growth priorities : gap × pillar weight
-  const priorities = CATEGORIES
-    .map(c => {
-      const score = getNormalizedScore(c.id);
-      const target = getCategoryTarget(c);
-      const gap = Math.max(0, target - score);
-      const pillar = getPillarById(c.pillar);
-      return { cat: c, pillar, score, target, gap, priority: gap * pillar.weight };
-    })
-    .filter(p => p.gap > 0)
-    .sort((a, b) => b.priority - a.priority)
-    .slice(0, 5);
+  // Growth Plan
+  const priorities = getTopPriorities();
 
-  const priorityCards = priorities.length
-    ? priorities.map((p, i) => `
-        <div class="priority-card">
-          <div class="priority-rank" style="background:${p.pillar.color}">${i + 1}</div>
-          <div class="priority-body">
-            <div class="priority-head">
-              <div class="priority-label">${p.cat.label}</div>
-              <div class="priority-meta">
-                <span class="priority-pillar" style="color:${p.pillar.color}">${p.pillar.label}</span>
-                <span class="priority-gap">${p.score} → ${p.target}</span>
+  const growthCards = priorities.length
+    ? priorities.map((p, i) => {
+        const tl = getTimeline(p.gap);
+        const behaviorsHtml = p.cat.behaviors
+          .map(b => `<li>${b}</li>`).join('');
+        const actionsHtml = p.cat.actions
+          .map(a => `<li>${a}</li>`).join('');
+        return `
+          <div class="growth-card">
+            <div class="growth-card-header">
+              <div class="growth-rank" style="background:${p.pillar.color}">${i + 1}</div>
+              <div class="growth-title-area">
+                <div class="growth-name">${p.cat.label}</div>
+                <div class="growth-meta">
+                  <span class="growth-pillar-tag" style="color:${p.pillar.color};background:${p.pillar.color}1A">${p.pillar.label}</span>
+                  <span class="growth-score-chip">${p.score} → ${p.target}</span>
+                  <span class="growth-timeline ${tl.cls}">⏱ ${tl.label}</span>
+                </div>
               </div>
             </div>
-            <ul class="priority-tips">
-              ${p.cat.tips.map(t => `<li>${t}</li>`).join('')}
-            </ul>
+            <div class="growth-card-body">
+              <div class="growth-section">
+                <div class="growth-section-label">Pratiques hebdomadaires</div>
+                <ul class="growth-behaviors">${behaviorsHtml}</ul>
+              </div>
+              <div class="growth-section">
+                <div class="growth-section-label">Actions immédiates</div>
+                <ul class="growth-actions-list">${actionsHtml}</ul>
+              </div>
+            </div>
+            <div class="growth-card-footer">
+              <span class="growth-book-ref">📖 Ch. ${p.cat.bookRef.chapter} — ${p.cat.bookRef.title}</span>
+            </div>
           </div>
-        </div>
-      `).join('')
+        `;
+      }).join('')
     : `<div class="priority-empty">Tu es au niveau ou au-dessus de la cible sur toutes les compétences. Vise le niveau supérieur 💪</div>`;
 
   app.innerHTML = `
@@ -1109,12 +1297,15 @@ function renderResults() {
         <canvas id="radar-chart"></canvas>
       </div>
 
-      <div class="priorities-block">
-        <div class="priorities-head">
-          <h3>Top ${priorities.length || 5} priorités de croissance</h3>
-          <p>Calculé selon l'écart à ta cible × l'importance du pillar dans l'industrie.</p>
+      <div class="growth-plan-block">
+        <div class="growth-plan-head">
+          <div class="growth-plan-head-text">
+            <h3>Plan de croissance</h3>
+            <p>Top ${priorities.length} priorités · écart × importance industrie (Dashinsky, 2023)</p>
+          </div>
+          <button class="btn btn-ghost btn-copy-plan" onclick="copyGrowthPlan()">Copier le plan ↗</button>
         </div>
-        <div class="priorities-list">${priorityCards}</div>
+        <div class="growth-cards-list">${growthCards}</div>
       </div>
 
       ${pillarSections}
@@ -1215,15 +1406,19 @@ function startQuiz() {
   state.currentIndex = 0;
   state.selectedOption = null;
   CATEGORIES.forEach(c => (state.scores[c.id] = 0));
-  // Track answer indices to allow back navigation
+  // Track answer indices (using ORIGINAL option index) to allow back navigation
   state.answers = new Array(QUESTIONS.length).fill(null);
+  // Randomise option order per question, stable for the whole session
+  state.optionOrder = QUESTIONS.map(q => shuffled(q.options.map((_, i) => i)));
   renderQuestion();
 }
 
-function selectAnswer(i) {
-  state.selectedOption = i;
-  document.querySelectorAll('.option').forEach((el, idx) => {
-    el.classList.toggle('selected', idx === i);
+function selectAnswer(origIdx) {
+  state.selectedOption = origIdx;
+  const order = state.optionOrder[state.currentIndex]
+    || QUESTIONS[state.currentIndex].options.map((_, i) => i);
+  document.querySelectorAll('.option').forEach((el, displayIdx) => {
+    el.classList.toggle('selected', order[displayIdx] === origIdx);
   });
   const btn = document.getElementById('btn-next');
   if (btn) btn.disabled = false;
