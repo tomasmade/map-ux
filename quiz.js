@@ -1069,6 +1069,46 @@ function copyGrowthPlan() {
 }
 
 // ─────────────────────────────────────────────────────────────────────
+// Persistence
+// ─────────────────────────────────────────────────────────────────────
+const STORAGE_KEY = 'mapux-results';
+
+function saveResults() {
+  const payload = {
+    scores:      state.scores,
+    targetLevel: state.targetLevel,
+    date:        new Date().toISOString(),
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+}
+
+function loadSavedResults() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return false;
+  try {
+    const saved = JSON.parse(raw);
+    Object.assign(state.scores, saved.scores);
+    state.targetLevel = saved.targetLevel;
+    state.phase       = 'results';
+    renderResults();
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function getSavedMeta() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return null;
+  try {
+    const saved = JSON.parse(raw);
+    const d = new Date(saved.date);
+    const date = d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+    return { date, targetLevel: LEVELS[saved.targetLevel]?.label ?? saved.targetLevel };
+  } catch { return null; }
+}
+
+// ─────────────────────────────────────────────────────────────────────
 // Theme
 // ─────────────────────────────────────────────────────────────────────
 let chartInstance = null;
@@ -1111,11 +1151,24 @@ function renderWelcome() {
     </button>
   `).join('');
 
+  const savedMeta = getSavedMeta();
+  const resumeBanner = savedMeta ? `
+    <div class="resume-banner">
+      <div class="resume-banner-left">
+        <div class="resume-banner-title">Résultats sauvegardés</div>
+        <div class="resume-banner-meta">Évaluation du ${savedMeta.date} · Cible ${savedMeta.targetLevel}</div>
+      </div>
+      <button class="btn btn-primary" onclick="loadSavedResults()">Voir mon plan →</button>
+    </div>
+  ` : '';
+
   app.innerHTML = `
     <div class="welcome">
       <div class="welcome-badge">✦ Self-Assessment · d'après Artiom Dashinsky</div>
       <h1>Où en est ton <span>potentiel senior ?</span></h1>
       <p>${QUESTIONS.length} questions pour cartographier tes compétences design au-delà de la craft — communication, collaboration, ownership, stratégie, mentorat.</p>
+
+      ${resumeBanner}
 
       <div class="welcome-stats">
         <div class="stat"><div class="stat-value">${QUESTIONS.length}</div><div class="stat-label">Questions</div></div>
@@ -1130,7 +1183,9 @@ function renderWelcome() {
         <div class="level-picker-grid">${levelCards}</div>
       </div>
 
-      <button class="btn btn-primary" onclick="startQuiz()">Commencer le quiz →</button>
+      <button class="btn ${savedMeta ? 'btn-ghost' : 'btn-primary'}" onclick="startQuiz()">
+        ${savedMeta ? '↩ Refaire le quiz' : 'Commencer le quiz →'}
+      </button>
     </div>
   `;
 }
@@ -1316,6 +1371,7 @@ function renderResults() {
     </div>
   `;
 
+  saveResults();
   drawRadarChart();
 }
 
